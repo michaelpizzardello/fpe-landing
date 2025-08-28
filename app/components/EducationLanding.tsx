@@ -3,6 +3,16 @@
 
 import React, { useEffect, useState, useRef } from "react";
 
+import localFont from "next/font/local";
+
+const brand = localFont({
+  src: "/fonts/brand.otf",
+  display: "swap", // good CLS behavior
+  preload: true, // preloads the font
+  weight: "400", // set the closest weight your OTF represents
+  style: "normal",
+});
+
 // Minimal, WakingUp-inspired landing page
 // - TailwindCSS classes for styling
 // - Anchored sections and sticky header
@@ -89,11 +99,9 @@ export default function EducationLanding() {
             >
               {/* Logo text scales down on scroll */}
               <span
-                className={`font-medium tracking-wide transition-all duration-300 ${
-                  scrolled ? "text-base" : "text-lg sm:text-xl"
-                }`}
+                className={`${brand.className} text-sm sm:text-base font-medium tracking-wide`}
               >
-                First Principles Education
+                FIRST PRINCIPLES EDUCATION
               </span>
             </a>
 
