@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Optional smoothing */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  /* Deeper, bluer sky so the reveal is obvious */
+  .hero-sky {
+    background: linear-gradient(
+      to bottom,
+      rgba(37, 99, 235, 0.55) 0%,    /* blue-600 */
+      rgba(59, 130, 246, 0.55) 30%,  /* blue-500 */
+      rgba(125, 211, 252, 0.55) 70%  /* sky-300 */
+    );
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Thick cloud veils that lift upward and fade out */
+  .hero-cloud {
+    position: absolute;
+    left: -12%;
+    width: 124%;
+    height: 150%;
+    filter: blur(22px);
+    will-change: transform, opacity;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(229, 231, 235, 0.95) 0%,   /* gray-200 */
+      rgba(243, 244, 246, 0.90) 25%,  /* gray-100 */
+      rgba(255, 255, 255, 0.80) 55%,
+      rgba(255, 255, 255, 0.00) 85%
+    );
+    animation: cloudLiftStrong 14s ease-in-out forwards;
+  }
+  .hero-cloud--near { top: -2%;  opacity: 0.95; animation-duration: 14s; }
+  .hero-cloud--far  { top: 10%;  opacity: 0.80; animation-duration: 18s; animation-delay: .5s; }
+
+  @keyframes cloudLiftStrong {
+    0%   { transform: translateY(0)     scale(1.02); opacity: 1;   }
+    50%  { transform: translateY(-40%)  scale(1.05); opacity: 0.45;}
+    100% { transform: translateY(-70%)  scale(1.08); opacity: 0;   }
+  }
+
+  /* Gentle white wisps that continue drifting after the lift */
+  .hero-wisp {
+    position: absolute;
+    width: 80vw; height: 80vw;         /* large soft blob */
+    border-radius: 50%;
+    background: radial-gradient(40% 40% at 50% 50%, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0) 70%);
+    filter: blur(18px);
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: wispDrift 38s ease-in-out infinite;
+  }
+  .hero-wisp--a { left: -10%; top: 60%; animation-duration: 42s; }
+  .hero-wisp--b { right: -15%; top: 35%; animation-duration: 52s; animation-direction: alternate; opacity: .25; }
+
+  @keyframes wispDrift {
+    0%   { transform: translate3d(0, 0, 0)      scale(1.0); }
+    50%  { transform: translate3d(6%, -6%, 0)   scale(1.06); }
+    100% { transform: translate3d(-4%, 5%, 0)   scale(1.0); }
+  }
+
+  /* Keep accessibility in mind */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cloud, .hero-wisp { animation: none; opacity: 0; }
+  }
 }
