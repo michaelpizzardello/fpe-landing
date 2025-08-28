@@ -254,12 +254,11 @@ export default function EducationLanding() {
                 </p>
                 <p className="mt-3 text-neutral-700">
                   <span className="font-medium">The Compass Within</span> is a
-                  The Compass Within is a 6-week foundational course that
-                  teaches the self-management skills schools don&rsquo;t.
-                  Grounded in psychology, neuroscience, and philosophy, it
-                  offers a powerful toolkit for building lifelong focus,
-                  direction, emotional resilience, good habits and mental
-                  health.
+                  6-week foundational course that teaches the self-management
+                  skills schools don&rsquo;t. Grounded in psychology,
+                  neuroscience, and philosophy, it offers a powerful toolkit for
+                  building lifelong focus, direction, emotional resilience, good
+                  habits and mental health.
                 </p>
                 <h4 className="mt-8 text-base font-semibold text-neutral-900">
                   What’s Included
