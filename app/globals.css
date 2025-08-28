@@ -5,6 +5,63 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 
 
 @layer utilities {
+  /* --- Faster looping wisps that start ~2–3s after load --- */
+.hero-wisp-fast {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+  border-radius: 50%;
+  background: radial-gradient(40% 40% at 50% 50%, rgba(14, 161, 240, 0.871) 0%, rgba(0, 183, 255, 0.2) 70%);
+  filter: blur(16px);
+  opacity: .26;
+  /* tip: keep transforms only for GPU perf */
+}
+
+/* 3 different sizes/paths with staggered delays */
+.hero-wisp-fast--1 {
+  width: 60vw; height: 60vw;
+  left: -15vw; top: 22vh;
+  animation: wispFast1 4s ease-in-out 2.2s infinite alternate;
+}
+
+.hero-wisp-fast--2 {
+  width: 48vw; height: 48vw;
+  right: -12vw; top: 36vh;
+  opacity: .22;
+  animation: wispFast2 11s ease-in-out 2.8s infinite alternate;
+}
+
+.hero-wisp-fast--3 {
+  width: 70vw; height: 70vw;
+  left: 10vw; top: 65vh;
+  opacity: .20; filter: blur(20px);
+  animation: wispFast3 8s ease-in-out 3.2s infinite alternate;
+}
+
+/* Paths: cross-viewport sweeps with gentle scale */
+@keyframes wispFast1 {
+  0%   { transform: translate3d(-8%, 4%, 0)  scale(0.96); }
+  50%  { transform: translate3d(42%, -10%, 0) scale(1.04); }
+  100% { transform: translate3d(105%, 6%, 0) scale(1.00); }
+}
+
+@keyframes wispFast2 {
+  0%   { transform: translate3d(8%, -6%, 0)  scale(0.98); }
+  50%  { transform: translate3d(-36%, 8%, 0) scale(1.06); }
+  100% { transform: translate3d(-90%, -4%, 0) scale(1.02); }
+}
+
+@keyframes wispFast3 {
+  0%   { transform: translate3d(-6%, 0%, 0)  scale(0.94); }
+  50%  { transform: translate3d(24%, -12%, 0) scale(1.06); }
+  100% { transform: translate3d(68%, 4%, 0)  scale(1.00); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-wisp-fast { animation: none; opacity: 0; }
+}
+
   /* Deeper, bluer sky so the reveal is obvious */
   .hero-sky {
     background: linear-gradient(

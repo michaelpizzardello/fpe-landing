@@ -6,10 +6,9 @@ import React, { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 
 const brand = localFont({
-  src: "/fonts/brand.otf",
-  display: "swap", // good CLS behavior
-  preload: true, // preloads the font
-  weight: "400", // set the closest weight your OTF represents
+  src: "../fonts/brand.otf", // <— relative to EducationLanding.tsx
+  display: "swap",
+  weight: "400",
   style: "normal",
 });
 
@@ -176,6 +175,10 @@ export default function EducationLanding() {
           {/* Persistent white wisps drifting */}
           <div className="hero-wisp hero-wisp--a"></div>
           <div className="hero-wisp hero-wisp--b"></div>
+          {/* Faster looping wisps that kick in after ~2–3s */}
+          <div className="hero-wisp-fast hero-wisp-fast--1" />
+          <div className="hero-wisp-fast hero-wisp-fast--2" />
+          <div className="hero-wisp-fast hero-wisp-fast--3" />
           {/* Bottom fade into next section color */}
           <div className="absolute inset-0 hero-fade-into-next" />
         </div>
@@ -183,11 +186,13 @@ export default function EducationLanding() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="py-20 sm:py-28">
             <div
-              className={`max-w-3xl mr-auto text-left transform-gpu transition-all duration-[8500ms] ease-out ${
+              className={`max-w-3xl mr-auto text-left transform-gpu transition-all duration-[6000ms] ease-out ${
                 reveal ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
             >
-              <h1 className="text-4xl/tight sm:text-5xl font-semibold tracking-tight">
+              <h1
+                className={`${brand.className} text-4xl/tight sm:text-5xl font-semibold tracking-tight`}
+              >
                 From Chaos to Clarity
               </h1>
               <p className="mt-5 max-w-2xl text-base sm:text-lg text-neutral-600">
