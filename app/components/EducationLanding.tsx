@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState, useRef } from "react";
 
 // Minimal, WakingUp-inspired landing page
