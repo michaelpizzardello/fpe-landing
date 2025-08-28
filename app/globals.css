@@ -11,7 +11,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   pointer-events: none;
   will-change: transform, opacity;
   border-radius: 50%;
-  background: radial-gradient(40% 40% at 50% 50%, rgba(14, 161, 240, 0.871) 0%, rgba(0, 183, 255, 0.2) 70%);
+  background: radial-gradient(40% 40% at 50% 50%, rgba(255, 255, 255, 0.843) 0%, rgba(0, 183, 255, 0.2) 70%);
   filter: blur(16px);
   opacity: .26;
   /* tip: keep transforms only for GPU perf */
