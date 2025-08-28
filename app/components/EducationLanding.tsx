@@ -69,20 +69,30 @@ export default function EducationLanding() {
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
       <header
-        className={`sticky top-0 z-50 transition-colors duration-300 ${
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pt-[env(safe-area-inset-top)] ${
           scrolled
             ? "border-b border-neutral-200 bg-white/80 backdrop-blur"
-            : "bg-transparent"
+            : "border-b-0 bg-transparent"
         }`}
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          {/* Height shrinks on scroll */}
+          <div
+            className={`flex items-center justify-between transition-all duration-300 ${
+              scrolled ? "h-16 py-0" : "h-24 sm:h-28 py-2"
+            }`}
+          >
             <a
               href="#home"
               className="flex items-center"
               aria-label="Go to home"
             >
-              <span className="text-sm sm:text-base font-medium tracking-wide">
+              {/* Logo text scales down on scroll */}
+              <span
+                className={`font-medium tracking-wide transition-all duration-300 ${
+                  scrolled ? "text-base" : "text-lg sm:text-xl"
+                }`}
+              >
                 First Principles Education
               </span>
             </a>
@@ -140,6 +150,7 @@ export default function EducationLanding() {
           </div>
         )}
       </header>
+
       {/* Hero */}
       <section
         id="home"
@@ -157,8 +168,8 @@ export default function EducationLanding() {
           {/* Persistent white wisps drifting */}
           <div className="hero-wisp hero-wisp--a"></div>
           <div className="hero-wisp hero-wisp--b"></div>
-          {/* Gentle readability fade near the bottom edge */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/35 to-white/80" />
+          {/* Bottom fade into next section color */}
+          <div className="absolute inset-0 hero-fade-into-next" />
         </div>
 
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
@@ -195,10 +206,7 @@ export default function EducationLanding() {
       </section>
 
       {/* Course */}
-      <section
-        id="course"
-        className="scroll-mt-24 border-t border-neutral-200 relative bg-neutral-50"
-      >
+      <section id="course" className="scroll-mt-24  relative bg-neutral-50">
         {/* Section banner image (full-bleed on mobile/tablet, constrained on desktop) */}
         <div className="-mx-4 sm:-mx-6 lg:mx-auto lg:max-w-6xl lg:px-8">
           <img
@@ -261,6 +269,12 @@ export default function EducationLanding() {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href="#contact"
+                  className="mt-6 sm:mt-8 lg:mt-12 inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-medium text-white hover:opacity-90"
+                >
+                  Book your free consultation
+                </a>
               </div>
 
               {/* Right: Modules */}
