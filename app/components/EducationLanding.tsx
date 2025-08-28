@@ -1,5 +1,6 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
+
 import React, { useEffect, useState, useRef } from "react";
 
 // Minimal, WakingUp-inspired landing page
@@ -23,6 +24,16 @@ export default function EducationLanding() {
   const [reveal, setReveal] = useState(false);
   useEffect(() => {
     setReveal(true);
+  }, []);
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10); // adjust threshold if needed
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -57,7 +68,13 @@ export default function EducationLanding() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur">
+      <header
+        className={`sticky top-0 z-50 transition-colors duration-300 ${
+          scrolled
+            ? "border-b border-neutral-200 bg-white/80 backdrop-blur"
+            : "bg-transparent"
+        }`}
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <a
@@ -126,7 +143,7 @@ export default function EducationLanding() {
       {/* Hero */}
       <section
         id="home"
-        className="relative min-h-[calc(100svh-64px)] flex items-center justify-start bg-white"
+        className="relative min-h-screen flex items-center justify-start"
       >
         <div
           aria-hidden
@@ -216,11 +233,12 @@ export default function EducationLanding() {
                 </p>
                 <p className="mt-3 text-neutral-700">
                   <span className="font-medium">The Compass Within</span> is a
-                  6-week foundational course that teaches the self-management
-                  skills schools don't. Grounded in psychology, neuroscience,
-                  and philosophy, it offers a powerful toolkit for building
-                  lifelong focus, direction, emotional resilience, good habits
-                  and mental health.
+                  The Compass Within is a 6-week foundational course that
+                  teaches the self-management skills schools don&rsquo;t.
+                  Grounded in psychology, neuroscience, and philosophy, it
+                  offers a powerful toolkit for building lifelong focus,
+                  direction, emotional resilience, good habits and mental
+                  health.
                 </p>
                 <h4 className="mt-8 text-base font-semibold text-neutral-900">
                   What’s Included
